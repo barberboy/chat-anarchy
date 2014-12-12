@@ -21,7 +21,7 @@ app.set('ip', process.env.IP || '0.0.0.0');
 
 app.get('/about', function(req, res, next) {
     res.render('about', {
-        title: req.path,
+        title: 'chat-anarchy' + req.path,
         about: true
     });
 });
@@ -29,14 +29,14 @@ app.get('/about', function(req, res, next) {
 /*
 app.get('/join', function(req, res, next) {
     res.render('join', {
-        title: req.path
+        title: 'chat-anarchy' + req.path
     });
 });
 */
 
 app.get('/*', function(req, res, next) {
     res.render('index', {
-        title: req.path
+        title: 'chat-anarchy' + req.path
     });
 });
 

@@ -1,21 +1,27 @@
 <!doctype html>
-<title>/about</title>
+<title>{{title}}</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link href='http://fonts.googleapis.com/css?family=Source+Code+Pro:200,300,400,500,600,700' rel='stylesheet' type='text/css'>
 <style>
     * {
-        font: 18px monospace;
+        font: 18px 'Source Code Pro';
+    }
+    body {
+        margin: 0;
+        padding-left: 10px;
+        padding-right: 10px;
     }
     .nav {
         width: 100%;
         background-color: #fff;
         z-index: 1;
         position: fixed;
-        top: -0px;
+        top: 0px;
     }
     .nav-ul {
         list-style-type: none;
         margin: 0;
-        padding: 2px;
+        padding: 6px;
         padding-bottom: 7px;
         border-bottom: 2px solid black;
     }
@@ -23,7 +29,7 @@
         display: inline;
     }
     .headertext {
-        font-weight: bold;
+        font-weight: 600;
     }
     a {
         text-decoration: none;
@@ -51,8 +57,8 @@
 </style>
 <div class="nav">
     <ul class="nav-ul">
-        <li class="nav-li headertext"><a href='/'>Chat Anarchy</a></li> |
-        <li class="nav-li headertext"><a {{#if about}}class="active"{{/if}} href='/about'>About</a></li>
+        <li class="nav-li headertext"><a href='/'>chat-anarchy</a></li> |
+        <li class="nav-li headertext"><a {{#if about}}class="active"{{/if}} href='/about'>about</a></li>
     </ul>
 </div>
 <p class="filler">Filler</p>
