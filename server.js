@@ -1,6 +1,7 @@
 var express = require('express'),
     http = require('http'),
     Moniker = require('moniker'),
+    favicon = require('serve-favicon'),
     hbs = require('hbs');
 
 var names = Moniker.generator([Moniker.adjective, Moniker.noun], {
@@ -18,6 +19,8 @@ app.engine('html', hbs.__express);
 // Set the port and ip address
 app.set('port', process.env.PORT || 8000);
 app.set('ip', process.env.IP || '0.0.0.0');
+
+app.use(favicon(__dirname + '/favicon.png'));
 
 app.get('/about', function(req, res, next) {
     res.render('about', {
