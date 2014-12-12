@@ -6,19 +6,20 @@
         font: 18px monospace;
     }
 </style>
+
 <input autofocus style="width:75%">
 <script src=/socket.io/socket.io.js></script>
 <script>
     document.title = location.pathname;
     var socket = io()
         .on('connect', function() {
-            socket.emit('join', location.pathname)
+            socket.emit('join', location.pathname);
         })
         .on('joined', function(user) {
             log(user + ' joined.');
         })
         .on('message', function(data) {
-            log(data.u + ': ' + data.m);
+            log(data.m, data.u);
         })
         .on('left', function(user) {
             log(user + ' left.');
@@ -29,12 +30,34 @@
         socket.send(this.value);
         this.value = '';
     };
+    
+    function log(message, user) {
+        if(user){
+            var username = document.createElement('span');
+            username.appendChild(document.createTextNode(user + ': '));
+            username.title = Date();
+            username.style.fontWeight = "bold";
 
-    function log(m) {
-        var p = document.createElement('p');
-        p.appendChild(document.createTextNode(m));
-        p.title = Date();
-        document.body.insertBefore(p, input);
-        p.scrollIntoView();
+            var usermessage = document.createElement('span');
+            usermessage.appendChild(document.createTextNode(message));
+            usermessage.style.fontWeight = "normal";
+            usermessage.title = Date();
+            
+            var newline = document.createElement('p');
+            newline.appendChild(document.createTextNode(''));
+
+            document.body.insertBefore(username, input);
+            document.body.insertBefore(usermessage, input);
+            document.body.insertBefore(newline, input);
+            newline.scrollIntoView();
+        } else {
+            var status = document.createElement('p');
+            status.appendChild(document.createTextNode(message));
+            status.title = Date();
+            status.style.fontStyle = "italic";
+            
+            document.body.insertBefore(status, input);
+            status.scrollIntoView();
+        }
     }
 </script>
