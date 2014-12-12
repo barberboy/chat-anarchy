@@ -4,8 +4,13 @@
   "description": "Multi-user, multi-room chat using socket.io.",
   "main": "server.js",
   "dependencies": {
-    "socket.io": "^1.2.1",
-    "moniker": "^0.1.2"
+    "body-parser": "^1.10.0",
+    "express": "^4.10.5",
+    "hbs": "^2.7.0",
+    "hbs-utils": "0.0.3",
+    "moniker": "^0.1.2",
+    "serve-favicon": "^2.1.7",
+    "socket.io": "^1.2.1"
   },
   "devDependencies": {},
   "scripts": {

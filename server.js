@@ -1,13 +1,46 @@
-var http = require('http'),
-    fs = require('fs'),
-    Moniker = require('moniker');
+var express = require('express'),
+    http = require('http'),
+    Moniker = require('moniker'),
+    favicon = require('serve-favicon'),
+    hbs = require('hbs');
 
 var names = Moniker.generator([Moniker.adjective, Moniker.noun], {
     glue: ' '
 });
 
-var server = http.createServer(function(req, res) {
-    fs.createReadStream(__dirname + '/index.html').pipe(res);
+var app = express();
+var server = http.createServer(app);
+
+
+// Set Handlebars running and as the engine for html
+app.set('view engine', 'hbs');
+app.engine('html', hbs.__express);
+
+// Set the port and ip address
+app.set('port', process.env.PORT || 8000);
+app.set('ip', process.env.IP || '0.0.0.0');
+
+app.use(favicon(__dirname + '/favicon.png'));
+
+app.get('/about', function(req, res, next) {
+    res.render('about', {
+        title: 'chat-anarchy' + req.path,
+        about: true
+    });
+});
+
+/*
+app.get('/join', function(req, res, next) {
+    res.render('join', {
+        title: 'chat-anarchy' + req.path
+    });
+});
+*/
+
+app.get('/*', function(req, res, next) {
+    res.render('index', {
+        title: 'chat-anarchy' + req.path
+    });
 });
 
 var io = require('socket.io')(server);
@@ -33,6 +66,7 @@ io.on('connection', function(socket) {
         });
 });
 
-server.listen(process.env.PORT || 1844, process.env.IP || '127.0.0.1', function() {
-    console.log("Chat anarchy is listening on port %d", server.address().port);
+server.listen(process.env.PORT || 3000, process.env.IP || "0.0.0.0", function(){
+    var addr = server.address();
+    console.log("Chat Anarchy listening at", addr.address + ":" + addr.port);
 });

@@ -1,0 +1,65 @@
+<!doctype html>
+<title>{{title}}</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href='http://fonts.googleapis.com/css?family=Source+Code+Pro:200,300,400,500,600,700' rel='stylesheet' type='text/css'>
+<style>
+    * {
+        font: 18px 'Source Code Pro';
+    }
+    body {
+        margin: 0;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    .nav {
+        width: 100%;
+        background-color: #fff;
+        z-index: 1;
+        position: fixed;
+        top: 0px;
+    }
+    .nav-ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 6px;
+        padding-bottom: 7px;
+        border-bottom: 2px solid black;
+    }
+    .nav-li {
+        display: inline;
+    }
+    .headertext {
+        font-weight: 600;
+    }
+    a {
+        text-decoration: none;
+        font-weight: inherit;
+        color: #000;
+    }
+    a:hover {
+        text-decoration: none;
+        font-weight: inherit;
+        color: #666;
+    }
+    .active {
+        background-color: #ddd;
+    }
+    .filler {
+        color: #fff;
+        background-color: #fff;
+    }
+    .link {
+        text-decoration: underline;
+    }
+    .link:hover {
+        text-decoration: underline;
+    }
+</style>
+<div class="nav">
+    <ul class="nav-ul">
+        <li class="nav-li headertext"><a href='/'>chat-anarchy</a></li> |
+        <li class="nav-li headertext"><a {{#if about}}class="active"{{/if}} href='/about'>about</a></li>
+    </ul>
+</div>
+<p class="filler">Filler</p>
+{{{body}}}

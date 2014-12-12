@@ -1,0 +1,54 @@
+<input autofocus style="width:100%">
+<script src=/socket.io/socket.io.js></script>
+<script>
+    var socket = io()
+        .on('connect', function() {
+            socket.emit('join', location.pathname);
+        })
+        .on('joined', function(user) {
+            log(user + ' joined.');
+        })
+        .on('message', function(data) {
+            log(data.m, data.u);
+        })
+        .on('left', function(user) {
+            log(user + ' left.');
+        });
+
+    var input = document.getElementsByTagName('input')[0];
+    input.onchange = function() {
+        socket.send(this.value);
+        this.value = '';
+    };
+    
+    function log(message, user) {
+        if(user){
+            var username = document.createElement('span');
+            username.appendChild(document.createTextNode(user + ': '));
+            username.title = Date();
+            username.style.fontWeight = "500";
+
+            var usermessage = document.createElement('span');
+            usermessage.appendChild(document.createTextNode(message));
+            usermessage.style.fontWeight = "300";
+            usermessage.title = Date();
+            
+            var newline = document.createElement('p');
+            newline.appendChild(document.createTextNode(''));
+
+            document.body.insertBefore(username, input);
+            document.body.insertBefore(usermessage, input);
+            document.body.insertBefore(newline, input);
+            newline.scrollIntoView();
+        } else {
+            var status = document.createElement('p');
+            status.appendChild(document.createTextNode(message));
+            status.title = Date();
+            status.style.fontStyle = "italic";
+            status.style.fontWeight = "300";
+            
+            document.body.insertBefore(status, input);
+            status.scrollIntoView();
+        }
+    }
+</script>
