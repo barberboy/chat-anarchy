@@ -21,15 +21,18 @@ app.set('ip', process.env.IP || '0.0.0.0');
 
 app.get('/about', function(req, res, next) {
     res.render('about', {
-        title: req.path
+        title: req.path,
+        about: true
     });
 });
 
+/*
 app.get('/join', function(req, res, next) {
     res.render('join', {
         title: req.path
     });
 });
+*/
 
 app.get('/*', function(req, res, next) {
     res.render('index', {
